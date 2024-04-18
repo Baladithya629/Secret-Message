@@ -31,7 +31,7 @@ def sendmail(to_addr,secret):
 
     msg = MIMEMultipart()
     msg['Subject'] = 'Secret message from Someone'
-    msg['From'] = os.getenv('FROM')
+    msg['From'] = os.environ.get('EMAIL')
     msg['To'] = to_addr
 
     text = MIMEText("You got a secret message from someone...\n")
@@ -43,23 +43,23 @@ def sendmail(to_addr,secret):
     
     text=MIMEText('\nTo decode the message click the link:\nhttps://caesarcipher.net/')
     msg.attach(text)
-    text=MIMEText('\n\n\nCopy and Paste this:-\n\n'+secret+'\n\nPut key = 3 and decode \n\nYour memory from this Ornate:-\n')
+    text=MIMEText('\n\n\nCopy and Paste this:-\n\n'+secret+'\n\nPut key = 3 and decode \n\nYour memory from Trinity 2k24:-\n')
     msg.attach(text)
 
         
     with smtplib.SMTP(server) as connection:
         connection.starttls()
-        connection.login(msg['From'],os.getenv('PASSKEY'))
+        connection.login(msg['From'],os.environ.get('PASS_KEY'))
         connection.sendmail(msg['From'],msg['To'],msg.as_string())
 
-   
+
 
 
 def put_text(text):
     img=Image.open('Secret Message.png')
 
     draw=ImageDraw.Draw(img)
-    font=ImageFont.truetype("/usr/share/fonts/opentype/malayalam/Manjari-Bold.otf",80)
+    font=ImageFont.truetype("Manjari-Bold.woff",80)
 
 
     wrapped_text=textwrap.wrap(text,width=50)
@@ -80,7 +80,6 @@ def put_text(text):
     img.save('secret.png')
     
 
-    
 
 
 app=Flask(__name__)
