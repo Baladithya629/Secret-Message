@@ -97,5 +97,5 @@ def home():
     return render_template('index.html')
 
 
-app.run(debug=False,port=5005,host='0.0.0.0')
+app.run(debug=False,host='0.0.0.0')
 
